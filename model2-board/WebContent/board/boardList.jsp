@@ -5,11 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title></title>
 </head>
 <body>
+<div class="container">
 	전체 행의 수 : ${totalRowCount} / ${list.size()}
-	<table border="1">
+	<table border="1" class="table">
 		<thead>
 			<tr>
 				<th>boardTitle</th>
@@ -40,6 +49,6 @@
 	<c:if test="${currentPage < lastPage}">
 		<a href="<c:url value='/board/BoardList?currentPage=${currentPage+1}'/>">다음</a>
 	</c:if>
-	
+</div>
 </body>
 </html>
