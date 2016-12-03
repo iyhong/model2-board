@@ -18,6 +18,12 @@ public class BoardModify extends HttpServlet {
 		if(request.getParameter("boardNo") == null) {
 		    response.sendRedirect(request.getContextPath()+"/board/BoardList");
 		} else {
+			if(request.getParameter("fail")!=null){
+				String fail = request.getParameter("fail");
+				request.setAttribute("fail", fail);
+			}else{
+				request.setAttribute("fail", "");
+			}
 		    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		    System.out.println("boardModify param boardNo:"+boardNo);
 		    boardDao = new BoardDao();
@@ -53,7 +59,9 @@ public class BoardModify extends HttpServlet {
 		    if(boardDao.updateBoard(board)==1){
 		    	response.sendRedirect(request.getContextPath()+"/board/BoardView?boardNo="+boardNo);
 		    }else{
-		    	response.sendRedirect(request.getContextPath()+"/board/BoardModify?boardNo="+boardNo);
+		    	System.out.println("수정실패");
+		    	String fail = "password incorrect";
+		    	response.sendRedirect(request.getContextPath()+"/board/BoardModify?boardNo="+boardNo+"&fail="+fail);
 		    }
 		}
 	}

@@ -13,9 +13,17 @@ import service.BoardDao;
 @WebServlet("/board/BoardRemove")
 public class BoardRemove extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("euc-kr");
 		if(request.getParameter("boardNo") == null) {
 		    response.sendRedirect(request.getContextPath()+"/board/BoardList");
 		} else {
+			if(request.getParameter("fail")!=null){
+				String fail = request.getParameter("fail");
+				request.setAttribute("fail", fail);
+				System.out.println("request 에 fail 넣음");
+			}else{
+				request.setAttribute("fail", "");
+			}
 			request.getRequestDispatcher("/board/boardRemoveForm.jsp").forward(request, response);
 		}
 	}
@@ -38,7 +46,8 @@ public class BoardRemove extends HttpServlet {
 		    	response.sendRedirect(request.getContextPath()+"/board/BoardList");
 		    } else {
 		    	System.out.println("삭제실패..ㅠㅠ");
-		    	response.sendRedirect(request.getContextPath()+"/board/BoardRemove?boardNo="+boardNo);
+		    	String fail = "password incorrect";
+		    	response.sendRedirect(request.getContextPath()+"/board/BoardRemove?boardNo="+boardNo+"&fail="+fail);
 		    }
 		}
 	}
